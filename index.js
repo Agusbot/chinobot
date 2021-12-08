@@ -1333,16 +1333,13 @@ const serialUser = createSerial(18)
          haitod = await getBuffer(`http://hadi-api.herokuapp.com/api/card/verify?nama=${encodeURI(pushname)}&member=${_registered.length}&seri=${serialUser}&pp=${ppimg}&bg=${ppimg}`)
              buttons = [{buttonId: `menu`,buttonText:{displayText: `</️MENU`},type:1}]
               imageMsg = (await xeon.prepareMessageMedia(haitod, "imageMessage", { thumbnail: haitod, })).imageMessage
-              buttonsMessage = {footerText:'Xeon', imageMessage: imageMsg,
+              buttonsMessage = {footerText:'Chino', imageMessage: imageMsg,
               contentText:`${anuu}`,buttons,headerType:4}
               prep = await xeon.prepareMessageFromContent(from,{buttonsMessage},{quoted: fkontak})
               xeon.relayWAMessage(prep)
 	         console.log(color('[REGISTER]'), color(time, 'yellow'), 'Serial:', color(serialUser, 'cyan'), 'in', color(sender || groupName))
 	    // console.log(e)
-            setTimeout( () => {
-			xeon.updatePresence(from, Presence.composing)
-			reply(`*Thank you for being registered Chino 𝐁𝐨𝐭*`)
-		}, 2000)
+     
         break
       
 case 'help':
@@ -2821,28 +2818,29 @@ break
         }
         break;
         // ytmp3
-case 'playm2': case 'ytmp3':
-									if (args.length === 0) return reply(`Send orders *${prefix}play* _The title of the song to be search for_`)
-									var srch = args.join(' ')
-									aramas = await yts(srch);
-									aramat = aramas.all 
-									var mulaikah = aramat[0].url
-									try {
-										yta(mulaikah)
-										.then((res) => {
-											const { dl_link, thumb, title, filesizeF, filesize } = res
-											axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
-											.then(async (a) => {
-												if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_For the duration of more than the limit is presented in the form of a link_`)
-												const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Espere a que se envie el archivo multimedia, puede tardar unos minutos_`
-												await sendMediaURL(from, thumb, captions)
-												sendMediaURL(from, dl_link).catch(() => reply('error'))
-												}) 
-											})
-										} catch (err) {
-											reply('There is an error')
-											}
-									break
+	case 'playm2': 
+	case 'ytmp3':
+				if (args.length === 0) return reply(`Send orders *${prefix}play* _The title of the song to be search for_`)
+				var srch = args.join(' ')
+				aramas = await yts(srch);
+				aramat = aramas.all 
+				var mulaikah = aramat[0].url
+				try {
+					yta(mulaikah)
+					.then((res) => {
+						const { dl_link, thumb, title, filesizeF, filesize } = res
+						axios.get(`https://tinyurl.com/api-create.php?url=${dl_link}`)
+						.then(async (a) => {
+							if (Number(filesize) >= 100000) return sendMediaURL(from, thumb, `*PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Filesize* : ${filesizeF}\n*Link* : ${a.data}\n\n_For the duration of more than the limit is presented in the form of a link_`)
+							const captions = `🎧 *PLAY MUSIC*\n\n*Title* : ${title}\n*Ext* : MP3\n*Size* : ${filesizeF}\n*Link* : ${a.data}\n\n_Espere a que se envie el archivo multimedia, puede tardar unos minutos_`
+							await sendMediaURL(from, thumb, captions)
+							sendMediaURL(from, dl_link).catch(() => reply('error'))
+							}) 
+						})
+					} catch (err) {
+						reply('There is an error')
+						}
+				break
         //ytmp4
               case "ytmp4":
         if (args.length === 0)
@@ -2875,7 +2873,7 @@ case 'playm2': case 'ytmp3':
         break;
         case 'playv2':   
 				  if (args.length < 1) return reply('*Enter the title?*')
-                reply('Loading.... ')
+                reply('Cargando.... ')
 				play6 = args.join(" ")
 				anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp4?q=${play6}&apikey=${zeksapi}`)
 				if (anu.error) return reply(anu.error)
@@ -2887,7 +2885,7 @@ Source : ${anu.result.source}
 *[Wait] Wait a moment..*`
 
 				buffer1 = await getBuffer(anu.result.url_video)
-				xeon.sendMessage(from, buffer1, video, {mimetype: 'video/mp4', filename: `${anu.result.video}.mp4`, quoted:freply, caption: 'Here bro'})
+				xeon.sendMessage(from, buffer1, video, {mimetype: 'video/mp4', filename: `${anu.result.video}.mp4`, quoted:freply, caption: 'Aqui lo tienes rey'})
 					break  
         //tiktok
         case 'tiktoknowm':   case 'tiktok':
@@ -4767,7 +4765,8 @@ buttons = [{buttonId: `writelist`,buttonText:{displayText: `Write List🔖`},typ
               xeon.relayWAMessage(prep)
 break
 case 'xs':
-if (!c) return reply('Looking for what?')
+if (!isGroup && !isBot) return reply('Looking for what?')
+reply(mess.wait)
 pepex = await fetchJson(`https://bx-hunter.herokuapp.com/api/xvideosearch?query=${c}&apikey=${HunterApi}`)
 reply(mess.wait)
 pepex = pepex.result
@@ -5814,7 +5813,7 @@ if (!isRegistered) return sendButMessage (from, daftar1, daftar2, daftar3, { quo
 
 case 'play2':   
 				  if (args.length < 1) return reply('*Enter the title?*')
-                reply('Loading.... ')
+                reply('Cargando.... ')
 				play6 = args.join(" ")
 				anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp4?q=${play6}&apikey=${zeksapi}`)
 				if (anu.error) return reply(anu.error)
@@ -5826,7 +5825,7 @@ Source : ${anu.result.source}
 *[Wait] Wait a moment..*`
 
 				buffer1 = await getBuffer(anu.result.url_video)
-				xeon.sendMessage(from, buffer1, video, {mimetype: 'video/mp4', filename: `${anu.result.video}.mp4`, quoted:freply, caption: 'Here bro'})
+				xeon.sendMessage(from, buffer1, video, {mimetype: 'video/mp4', filename: `${anu.result.video}.mp4`, quoted:freply, caption: 'Aqui lo tienes rey'})
 					break  
 			
       case "video":
@@ -5962,7 +5961,7 @@ Source : ${anu.result.source}
         });
         break;
       case "ytsearch":
-        if (args.length < 1) return reply("Please enter a query!");
+        if (args.length < 1) return reply("Por favor ingrese una consulta!");
         var srch = args.join("");
         try {
           var aramas = await yts(srch);
@@ -6035,7 +6034,7 @@ Source : ${anu.result.source}
         break;
 
       case "emoji":
-        if (!q) return fakegroup("the emoji?");
+        if (!q) return fakegroup("el emoji?");
         qes = args.join(" ");
         emoji.get(`${qes}`).then((emoji) => {
           teks = `${emoji.images[4].url}`;
@@ -6047,7 +6046,7 @@ Source : ${anu.result.source}
       case "image":
       case "gimage":
       case "googleimage":
-        if (args.length < 1) return reply("What do you want to search?");
+        if (args.length < 1) return reply("Que quieres buscar?");
         reply(mess.wait);
         teks = args.join(" ");
         res = await gis(teks, google);
