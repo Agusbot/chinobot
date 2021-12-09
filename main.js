@@ -140,12 +140,12 @@ fkontakk = { key: {
  }}}
 metdata = await client.groupMetadata(anu.jid)
 if(anu.announce == 'false'){
-teks = ` [ Group Opened ] \n\n_Group has been opened by admin_\n_Now all members can send messages_`
+teks = ` [ Grupo Abierto ] \n\n_El grupo ha sido abierto por el administrador_\n_Ahora todos los miembros pueden enviar mensajes_`
 client.sendMessage(metdata.id, teks, MessageType.text, {quoted: fkontakk})
 console.log(`- [ Group Opened ] - In ${metdata.subject}`)
 }
 else if(anu.announce == 'true'){
-teks = ` [ Group Closed ] \n\n_Group has been closed by admin_\n_Now only admin can send messages_`
+teks = ` [ Grupo Cerrado ] \n\n_El grupo ha sido cerrado por el administrador_\n_Ahora solo el administrador puede enviar mensajes_`
 client.sendMessage(metdata.id, teks, MessageType.text, {quoted: fkontakk})
 console.log(` [ Group Closed ]  In ${metdata.subject}`)
 }
